@@ -1,4 +1,4 @@
 ortools
 pandas
 flask
-colombian-holidays
+holidays_co
