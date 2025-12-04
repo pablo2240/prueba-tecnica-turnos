@@ -4,9 +4,9 @@ from datetime import datetime, timedelta, date
 from holidays_co import is_holiday_date
 
 
-# -------------------------------------------------------
+
 # Clase generadora de turnos con festivos de Colombia
-# -------------------------------------------------------
+
 class GeneradorTurnos:
     def __init__(self, aplicar_regla_especial=False, fecha_inicio="2025-12-02", dias_por_semana=6):
         """
@@ -24,17 +24,17 @@ class GeneradorTurnos:
         self.dias_por_semana = dias_por_semana
 
 
-    # -------------------------------------------------------
+
     # Verifica si la fecha es festivo usando holidays_co
-    # -------------------------------------------------------
+
     def es_festivo(self, fecha_datetime):
         """Recibe datetime y evalúa si es festivo (usando holidays_co)."""
         return is_holiday_date(fecha_datetime.date())  # True/False
 
 
-    # -------------------------------------------------------
+
     # Genera los días laborales de la semana, excluyendo domingos y festivos
-    # -------------------------------------------------------
+
     def obtener_dias_semana(self):
         dias = []
         d = 0
@@ -56,9 +56,9 @@ class GeneradorTurnos:
         return dias
 
 
-    # -------------------------------------------------------
+
     # Construcción del modelo CP-SAT
-    # -------------------------------------------------------
+
     def construir_modelo(self):
         model = cp_model.CpModel()
         dias = self.obtener_dias_semana()
@@ -100,9 +100,9 @@ class GeneradorTurnos:
         self.dias = dias
 
 
-    # -------------------------------------------------------
+
     # Resolver CP-SAT
-    # -------------------------------------------------------
+
     def resolver(self):
         solver = cp_model.CpSolver()
         resultado = solver.Solve(self.model)
@@ -125,9 +125,9 @@ class GeneradorTurnos:
         return pd.DataFrame(filas)
 
 
-    # -------------------------------------------------------
+
     # Ejecutar todo el flujo
-    # -------------------------------------------------------
+
     def ejecutar(self):
         self.construir_modelo()
         return self.resolver()
