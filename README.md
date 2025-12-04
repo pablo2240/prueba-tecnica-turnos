@@ -1,45 +1,36 @@
-# Prueba Técnica - Generador de Turnos (Python)
+# 🧠 Planeador de Turnos usando OR-Tools + Flask + Festivos de Colombia
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-Web%20Framework-black?logo=flask)
+![OR-Tools](https://img.shields.io/badge/OR--Tools-Google%20CP--SAT-orange?logo=google)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas)
+![holidays_co](https://img.shields.io/badge/Festivos-Colombia%20API-yellow?logo=calendar)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple?logo=bootstrap)
 
-Descripción
------------
-Proyecto sencillo que resuelve la asignación de turnos para 3 asesores usando OR-Tools CP-SAT y muestra el resultado con Flask.
+Este proyecto es una solución a una prueba técnica donde se debe generar la planeación semanal de turnos para un punto de venta (PDV), cumpliendo reglas específicas y excluyendo automáticamente los **festivos oficiales de Colombia** mediante la librería `holidays_co`.
 
-Requisitos
-----------
-- Python 3.8+
-- pip
+---
 
-Instalación
-----------
-1. Clonar el repositorio:
-   git clone <URL_DEL_REPOSITORIO>
-2. Entrar a la carpeta:
-   cd proyecto_turnos
-3. Instalar dependencias:
-   pip install -r requirements.txt
+## 📌 Tecnologías utilizadas
 
-Archivos importantes
---------------------
-- generador.py  -> Clase GeneradorTurnos (construye y resuelve el modelo)
-- app.py        -> Interfaz Flask para generar y mostrar la planeación
-- requirements.txt
-- README.md
+- **Python 3**
+- **Flask** (para el sitio web)
+- **OR-Tools CP-SAT Solver** (asignación de turnos de manera óptima)
+- **Pandas** (para construir tablas)
+- **holidays_co** (para detectar días festivos en Colombia)
+- **Bootstrap 5** (para interfaz visual)
 
-Cómo ejecutar
--------------
-1. Ejecuta la aplicación:
-   python app.py
-2. Abre en el navegador:
-   http://127.0.0.1:5000
+---
 
-Notas técnicas
---------------
-- Se usa OR-Tools CP-SAT para modelar restricciones: 1 turno por asesor por día, cada turno ocupado por un asesor, turno constante durante la semana, domingos y festivos excluidos.
-- Existe opción para fijar que una asesora trabaje siempre Apertura (parametro `aplicar_regla_especial=True`).
-- Manejo de errores básico incluido; si no hay solución, se muestra excepción.
+## 🎯 Descripción de la solución
 
-Posibles mejoras
-----------------
-- Añadir manejo de festivos (lista de fechas).
-- Implementar rotación semanal (planeación mensual).
-- Mejorar interfaz con HTML/CSS (Bootstrap).
+Se implementa una clase llamada **`GeneradorTurnos`**, que utiliza un modelo CP-SAT de OR-Tools para asignar turnos bajo las siguientes reglas:
+
+### ✔ Reglas obligatorias
+
+1. Cada asesor debe tener **un solo turno por día**.
+2. Cada turno debe ser tomado por **exactamente un asesor**.
+3. Durante la semana, cada asesor mantiene **el mismo turno todos los días**.
+4. No se generan turnos los **domingos**.
+5. No se generan turnos en **festivos oficiales de Colombia**, usando:
+   ```python
+   from holidays_co import is_holiday_date
