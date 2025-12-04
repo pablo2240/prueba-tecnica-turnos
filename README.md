@@ -34,7 +34,7 @@ Cómo ejecutar
 
 Notas técnicas
 --------------
-- Se usa OR-Tools CP-SAT para modelar restricciones: 1 turno por asesor por día, cada turno ocupado por un asesor, turno constante durante la semana, domingos excluidos.
+- Se usa OR-Tools CP-SAT para modelar restricciones: 1 turno por asesor por día, cada turno ocupado por un asesor, turno constante durante la semana, domingos y festivos excluidos.
 - Existe opción para fijar que una asesora trabaje siempre Apertura (parametro `aplicar_regla_especial=True`).
 - Manejo de errores básico incluido; si no hay solución, se muestra excepción.
 
