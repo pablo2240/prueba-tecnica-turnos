@@ -1,4 +1,4 @@
-ortools
-pandas
-flask
-holidays_co
+pip install ortools
+pip install pandas
+pip install flask
+pip install holidays_co

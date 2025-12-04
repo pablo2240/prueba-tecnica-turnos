@@ -1,6 +1,6 @@
 import pandas as pd
 from ortools.sat.python import cp_model
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta
 from holidays_co import is_holiday_date
 
 
